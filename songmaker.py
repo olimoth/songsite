@@ -255,7 +255,6 @@ class SongWriter(object):
         8a,8a,5b,5b,8a
         Returns a list of tuples of the form [(syllables, rhyme), ...]
         '''
-        # todo: add a whole bunch of error checking if/when this goes public
         split_regex = r'([0-9]+)([a-z]),?'
         lines = re.findall(split_regex, rhyming_scheme)
         return [(int(line[0]), line[1]) for line in lines]
