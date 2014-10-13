@@ -142,7 +142,7 @@ class TestSongWriter(unittest.TestCase):
     
     def test_construct_maps(self):
         words = ['fantastish', 'fish', 'dish', 'glombar', 'car', 'phone', 'tone']
-        song_writer = songmaker.SongWriter(words, '')
+        song_writer = songmaker.SongWriter(words)
         song_writer.construct_maps()
         self.assertItemsEqual(
             ['fish', 'dish', 'car', 'phone', 'tone'], song_writer.words_by_syllable[1])

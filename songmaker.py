@@ -242,14 +242,13 @@ class SongWriter(object):
     ''' 
     Uses a reverse Trie to write songs that rhyme by matching end syllables 
     '''
-    def __init__(self, words, rhyming_scheme):
+    def __init__(self, words):
         self.all_words = words
         self.words_by_syllable = None
         self.trie = None
-        self.rhyming_scheme = rhyming_scheme
         self.first_time = True
 
-    def get_parsed_rhyming_scheme(self):
+    def get_parsed_rhyming_scheme(self, rhyming_scheme):
         ''' 
         Rhyming scheme is of the form N:X, where N is number of syllables in the line
         and X is the type of rhyme. For example the rhyming scheme for a limerick is:
@@ -257,7 +256,7 @@ class SongWriter(object):
         Returns a list of tuples of the form [(syllables, rhyme), ...]
         '''
         # todo: add a whole bunch of error checking if/when this goes public
-        lines = self.rhyming_scheme.split(',')
+        lines = rhyming_scheme.split(',')
         return [(int(line[0]), line[1]) for line in lines]
 
     def get_words_by_syllable(self, words):
@@ -285,10 +284,10 @@ class SongWriter(object):
         rhyme_groups = self.get_rhyme_groups()
         self.rhyme_groups = [self.get_words_by_syllable(g) for g in rhyme_groups]
 
-    def get_song(self):
+    def get_song(self, rhyming_scheme):
         ''' Get a random song based on the words contained in self.trie '''
         self.construct_maps()
-        scheme = self.get_parsed_rhyming_scheme()
+        scheme = self.get_parsed_rhyming_scheme(rhyming_scheme)
         distinct_schemes = set([line[1] for line in scheme])
         scheme_to_words = {}
         # make a copy so we can remove entries to avoid duplicate rhymes, 
@@ -301,7 +300,6 @@ class SongWriter(object):
             rhyme_group_copy.remove(rhyme_group)
         song = []
         for current_line_scheme in scheme:
-            #import pdb; pdb.set_trace()
             current_line_syllables = 0
             average_syllables = math.ceil(float(current_line_scheme[0])/2)
             last_word_max_syllables = random.randint(1, average_syllables) 
@@ -358,7 +356,7 @@ if __name__ == '__main__':
 
     if args.generate_songs:
         loads_of_words = [generator.generate_word() for i in range(args.num_words)]
-        song_writer = SongWriter(loads_of_words, args.rhyming_scheme)
+        song_writer = SongWriter(loads_of_words)
     
     while user_input != 'q':
         if args.generate_words:
@@ -367,7 +365,8 @@ if __name__ == '__main__':
             user_input = raw_input()
         elif args.generate_songs:
             try:
-                print song_writer.get_song()
+                print song_writer.get_song(args.rhyming_scheme)
+                import pdb; pdb.set_trace() 
             except IndexError:
                 continue
             user_input = raw_input()
