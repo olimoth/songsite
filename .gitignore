@@ -7,6 +7,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+dev/
 env/
 build/
 develop-eggs/
@@ -52,3 +53,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# vim
+*.swp
