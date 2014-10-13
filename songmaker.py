@@ -117,24 +117,6 @@ def count_syllables(word):
     return syllables
 
 
-class TestSyllables(unittest.TestCase):
-    ''' Tests for the syllable counting function '''
-    def test_various_words(self):
-        words = [
-            ('motherfucker', 4),
-            ('peepee', 2),
-            ('flange', 1),
-            ('empyrean', 4),
-            ('diabolically', 6),
-            ('biography', 4),
-            ('zwfqrns', 0),
-        ]
-        for word, syllables in words:
-            calculated_syllables = count_syllables(word)
-            self.assertEqual(calculated_syllables, syllables,
-                '%s should have had %s syllables, but had %s' % (
-                    word, syllables, calculated_syllables)) 
-
 
 class Letter(object):
     ''' 
@@ -153,24 +135,6 @@ class Letter(object):
 
     def add_position(self, position):
         self.positions[position] += 1
-
-
-class TestLetter(unittest.TestCase):
-    def test_add_follower(self):
-        letter = Letter('a')
-        letter.add_follower('b')
-        letter.add_follower('b')
-        letter.add_follower('c')
-        self.assertEqual(letter.followers['b'], 2)
-        self.assertEqual(letter.followers['c'], 1)
-
-    def test_add_position(self):
-        letter = Letter('a')
-        letter.add_position(1)
-        letter.add_position(1)
-        letter.add_position(2)
-        self.assertEqual(letter.positions[1], 2)
-        self.assertEqual(letter.positions[2], 1)
 
 
 class Reader(object):
@@ -215,49 +179,6 @@ class Reader(object):
         followers = self.letters[letter].followers
         return sorted(followers, key=followers.get, reverse=True)[:num_letters]
 
-
-class TestReader(unittest.TestCase):
-
-    def test_single_word(self):
-        text = StringIO.StringIO('word')
-        reader = Reader(text)
-        reader.parse_text()
-        self.assertEqual(reader.letters['w'].followers['o'], 1)
-        self.assertEqual(reader.letters['w'].positions[0], 1)
-
-    def test_multiple_words(self):
-        text = StringIO.StringIO('two words')
-        reader = Reader(text)
-        reader.parse_text()
-        self.assertEqual(reader.letters['w'].followers['o'], 2) 
-
-    def test_mixed_case_and_odd_characters(self):
-        text = StringIO.StringIO('wEiRd _sTU.ff\nwhatttt')
-        reader = Reader(text)
-        reader.parse_text()
-        self.assertEqual(reader.letters['t'].followers['u'], 1)
-        self.assertEqual(reader.letters['u'].followers['f'], 0)
-
-    def test_letters_at_position(self):
-        text = StringIO.StringIO('face bard cash mang fish pish czar')
-        reader = Reader(text)
-        reader.parse_text()
-        letters = reader.letters_at_position(position=1, num_letters=2)
-        self.assertEqual(letters, ['a', 'i'])
-
-    def test_following_letters(self):
-        text = StringIO.StringIO('ab ab ab ac ac ad')
-        reader = Reader(text)
-        reader.parse_text()
-        letters = reader.following_letters(letter='a', num_letters=2)
-        self.assertEqual(letters, ['b', 'c'])
-
-    def test_specific_letters_at_position(self):
-        text = StringIO.StringIO('ab ab ab ad ad ac')
-        reader = Reader(text)
-        reader.parse_text()
-        letters = reader.specific_letters_at_position(position=1, letters=['c', 'd', 'q'])
-        self.assertEqual(letters, ['d', 'c', 'q'])
 
 
 class WordGenerator(object):
@@ -398,29 +319,15 @@ class SongWriter(object):
         return ' '.join(song)
 
 
-class TestSongWriter(unittest.TestCase):
-    
-    def test_construct_maps(self):
-        words = ['fantastish', 'fish', 'dish', 'glombar', 'car', 'phone', 'tone']
-        song_writer = SongWriter(words, '')
-        song_writer.construct_maps()
-        self.assertItemsEqual(
-            ['fish', 'dish', 'car', 'phone', 'tone'], song_writer.words_by_syllable[1])
-        self.assertItemsEqual(['glombar'], song_writer.words_by_syllable[2])
-        self.assertItemsEqual(['fantastish'], song_writer.words_by_syllable[3])
-        #print song_writer.rhyme_groups
-        #ish_group = [g for g in song_writer.rhyme_groups if 'fantastish' in g][0]
-        #self.assertItemsEqual(['fantastish', 'fish', 'dish'], ish_group)
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--test', action='store_true', help='Run unit tests and exit')
     parser.add_argument('-d', '--debug', action='store_true', help='Activate debug logging')
     parser.add_argument('--source-text', default='eightydays.txt',
         help='The source text to extract letter frequency data from')
-    parser.add_argument('--min', type=int, default=4, help='Minimum number of letters in words')
-    parser.add_argument('--max', type=int, default=9, help='Maximum number of letters in words')
+    parser.add_argument('--min', type=int, default=4, 
+        help='Minimum number of letters in words')
+    parser.add_argument('--max', type=int, default=9, 
+        help='Maximum number of letters in words')
     parser.add_argument('-w', '--generate-words', action='store_true')
     parser.add_argument('-s', '--generate-songs', action='store_true')
     parser.add_argument('-p', '--rhyming-scheme', default='8a,8a,5b,5b,8a',
@@ -431,10 +338,6 @@ if __name__ == '__main__':
     parser.add_argument('--benchmark', type=int, help='Benchmark x iterations')
     args = parser.parse_args()
 
-    if args.test:
-        sys.argv = sys.argv[0:1]
-        unittest.main()
-        sys.exit(0)
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
 
@@ -455,7 +358,7 @@ if __name__ == '__main__':
 
     if args.generate_songs:
         loads_of_words = [generator.generate_word() for i in range(args.num_words)]
-        song_writer = SongWriter(loads_of_words, args.rhyming_scheme) #'8a,8a,5b,5b,8a')
+        song_writer = SongWriter(loads_of_words, args.rhyming_scheme)
     
     while user_input != 'q':
         if args.generate_words:
@@ -466,6 +369,5 @@ if __name__ == '__main__':
             try:
                 print song_writer.get_song()
             except IndexError:
-                #print 'fuck'
                 continue
             user_input = raw_input()
