@@ -300,21 +300,22 @@ class SongWriter(object):
             rhyme_group_copy.remove(rhyme_group)
         song = []
         for current_line_scheme in scheme:
+            line = ''
             current_line_syllables = 0
             average_syllables = math.ceil(float(current_line_scheme[0])/2)
             last_word_max_syllables = random.randint(1, average_syllables) 
             while current_line_syllables < current_line_scheme[0] - last_word_max_syllables:
                 current_word_syllables = random.randint(1, average_syllables)
                 current_word = random.choice(self.words_by_syllable[current_word_syllables])
-                song.append(current_word)
+                line += current_word + ' '
                 current_line_syllables += current_word_syllables
             # finish line with word of remaining syllables from chosen rhyme group
             rhyme_word_syllables = current_line_scheme[0] - current_line_syllables
             rhyme_word = random.choice(
                 scheme_to_words[current_line_scheme[1]][rhyme_word_syllables])
-            song.append(rhyme_word)
-            song.append('\n')
-        return ' '.join(song)
+            line += rhyme_word
+            song.append(line)
+        return song
 
 
 if __name__ == '__main__':
@@ -365,8 +366,8 @@ if __name__ == '__main__':
             user_input = raw_input()
         elif args.generate_songs:
             try:
-                print song_writer.get_song(args.rhyming_scheme)
-                import pdb; pdb.set_trace() 
+                song = song_writer.get_song(args.rhyming_scheme)
+                print '\n'.join(song)
             except IndexError:
                 continue
             user_input = raw_input()
