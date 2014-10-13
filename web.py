@@ -12,9 +12,11 @@ MAX_LETTERS = 9
 @app.route("/song")
 def get_song():
     scheme = flask.request.args.get('scheme')
+    min_syllables = int(flask.request.args.get('minSyllables', 1))
+    max_syllables = int(flask.request.args.get('maxSyllables', 4))
     while True:
         try:
-            song = song_writer.get_song(scheme)
+            song = song_writer.get_song(scheme, min_syllables, max_syllables)
             return flask.jsonify({'songlines': song})
         except IndexError:
             continue

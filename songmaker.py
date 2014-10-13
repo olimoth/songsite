@@ -284,8 +284,10 @@ class SongWriter(object):
         rhyme_groups = self.get_rhyme_groups()
         self.rhyme_groups = [self.get_words_by_syllable(g) for g in rhyme_groups]
 
-    def get_song(self, rhyming_scheme):
+    def get_song(self, rhyming_scheme, min_syllables=1, max_syllables=4):
         ''' Get a random song based on the words contained in self.trie '''
+        # check if min < 0 or max > [word group with highest number of syllables]
+        # and return error (throw exception?)
         self.construct_maps()
         scheme = self.get_parsed_rhyming_scheme(rhyming_scheme)
         distinct_schemes = set([line[1] for line in scheme])
@@ -302,10 +304,9 @@ class SongWriter(object):
         for current_line_scheme in scheme:
             line = ''
             current_line_syllables = 0
-            average_syllables = math.ceil(float(current_line_scheme[0])/2)
-            last_word_max_syllables = random.randint(1, average_syllables) 
+            last_word_max_syllables = random.randint(min_syllables, max_syllables) 
             while current_line_syllables < current_line_scheme[0] - last_word_max_syllables:
-                current_word_syllables = random.randint(1, average_syllables)
+                current_word_syllables = random.randint(min_syllables, max_syllables) 
                 current_word = random.choice(self.words_by_syllable[current_word_syllables])
                 line += current_word + ' '
                 current_line_syllables += current_word_syllables
