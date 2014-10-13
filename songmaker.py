@@ -256,7 +256,8 @@ class SongWriter(object):
         Returns a list of tuples of the form [(syllables, rhyme), ...]
         '''
         # todo: add a whole bunch of error checking if/when this goes public
-        lines = rhyming_scheme.split(',')
+        split_regex = r'([0-9]+)([a-z]),?'
+        lines = re.findall(split_regex, rhyming_scheme)
         return [(int(line[0]), line[1]) for line in lines]
 
     def get_words_by_syllable(self, words):

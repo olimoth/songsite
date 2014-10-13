@@ -152,6 +152,12 @@ class TestSongWriter(unittest.TestCase):
         #ish_group = [g for g in song_writer.rhyme_groups if 'fantastish' in g][0]
         #self.assertItemsEqual(['fantastish', 'fish', 'dish'], ish_group)
 
+    def test_get_parsed_rhyming_scheme(self):
+        song_writer = songmaker.SongWriter([])
+        raw_scheme = '8a,12b,1c,100a'
+        parsed_scheme = song_writer.get_parsed_rhyming_scheme(raw_scheme)
+        self.assertEqual(parsed_scheme, [(8, 'a'), (12, 'b'), (1, 'c'), (100, 'a')])
+
 
 if __name__ == '__main__':
     unittest.main()
