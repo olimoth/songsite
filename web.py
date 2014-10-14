@@ -17,7 +17,9 @@ def get_song():
     while True:
         try:
             song = song_writer.get_song(scheme, min_syllables, max_syllables)
-            return flask.jsonify({'songlines': song})
+            resp = flask.make_response(flask.jsonify({'songlines': song}))
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
         except IndexError:
             continue
 
@@ -35,4 +37,4 @@ if __name__ == "__main__":
 
     print 'ready'
 
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

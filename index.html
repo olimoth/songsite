@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                console.log("document ready");
+                $.get(
+                    "http://localhost:5000/song", 
+                    {"scheme": "8a,8a,5b,5b,8a"},
+                    function(result) { 
+                        firstLine = result["songlines"][0];
+                        $("#songDiv").text(firstLine);
+                    }
+                );
+            });
+        </script>
+    </head>
+    <body> 
+        <div id="songDiv" />
+    </body>
+</html>
