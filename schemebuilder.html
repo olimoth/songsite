@@ -4,9 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      button {
+        margin-bottom: 5px;
+        margin-top: 5px;
+      }
+    </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript">
       var scheme = '';    
+
+      $(document).ready(function() {
+        $(".syllable").addClass("btn-primary");
+        $(".rhyme").addClass("btn-info");
+      });
 
       function addSyllable(num) {
         console.log('adding num: ' + num);
@@ -34,15 +45,15 @@
     <br />
     <br />
     <div id="schemediv" class="col-sm-offset-4">
-      <button class="syllable btn btn-default" onclick="addSyllable('2')">2</button>
-      <button class="syllable btn btn-default" onclick="addSyllable('3')">3</button>
-      <button class="syllable btn btn-default" onclick="addSyllable('4')">4</button>
-      <button class="syllable btn btn-default" onclick="addSyllable('5')">5</button>
+      <button class="syllable btn" onclick="addSyllable('2')">2</button>
+      <button class="syllable btn" onclick="addSyllable('3')">3</button>
+      <button class="syllable btn" onclick="addSyllable('4')">4</button>
+      <button class="syllable btn" onclick="addSyllable('5')">5</button>
       <br />
-      <button disabled class="rhyme btn btn-default" onclick="addRhyme('a')">a</button>
-      <button disabled class="rhyme btn btn-default" onclick="addRhyme('b')">b</button>
-      <button disabled class="rhyme btn btn-default" onclick="addRhyme('c')">c</button>
-      <button disabled class="rhyme btn btn-default" onclick="addRhyme('d')">d</button>
+      <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
+      <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
+      <button disabled class="rhyme btn" onclick="addRhyme('c')">c</button>
+      <button disabled class="rhyme btn" onclick="addRhyme('d')">d</button>
     </div>
     <br />
     <br />
