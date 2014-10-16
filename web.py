@@ -4,7 +4,7 @@ import songmaker
 
 app = flask.Flask(__name__)
 
-WORD_POOL_SIZE = 10000
+WORD_POOL_SIZE = 50000
 MIN_LETTERS = 4
 MAX_LETTERS = 9
 
@@ -25,7 +25,7 @@ def get_song():
 
 
 if __name__ == "__main__":
-    reader = songmaker.Reader(open('eightydays.txt', 'r'))
+    reader = songmaker.Reader(open('metamorphosis.txt', 'r'))
     reader.parse_text()
     generator = songmaker.WordGenerator(
         reader,
