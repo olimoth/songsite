@@ -15,10 +15,16 @@
             };
 
             function getSong() {
+                maxSyllables = $("#maxSyllables").val();
+                minSyllables = $("#minSyllables").val();
                 scheme = $("#scheme").val();
                 $.get(
                     "http://garywalkerphoto.com:5000/song", 
-                    {"scheme": scheme},
+                    {
+                      "minSyllables": minSyllables,
+                      "maxSyllables": maxSyllables,
+                      "scheme": scheme,
+                    },
                     showSong
                 );
             };
@@ -26,8 +32,8 @@
     </head>
     <body> 
         <form>
-            max syllables  : <input type="text" id="maxSyllables"><br />
-            min syllables  : <input type="text" id="minSyllables"><br />
+            min syllables  : <input type="text" id="minSyllables" value="1"><br />
+            max syllables  : <input type="text" id="maxSyllables" value="4"><br />
             rhyming scheme : <input type="text" id="scheme"><br />
             <input type="button" value="get my song" onclick="getSong()">
         </form>
