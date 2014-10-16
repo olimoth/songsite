@@ -1,5 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html language="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <title>Nonsense Song Generator</title>
+
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -31,13 +39,48 @@
         </script>
     </head>
     <body> 
-        <form>
-            min syllables  : <input type="text" id="minSyllables" value="1"><br />
-            max syllables  : <input type="text" id="maxSyllables" value="4"><br />
-            rhyming scheme : <input type="text" id="scheme"><br />
-            <input type="button" value="get my song" onclick="getSong()">
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+
+      <br />
+      <br />
+      <br />
+      <div class="my-magic-song-form">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="minSyllables" class="control-label col-sm-2 col-sm-offset-3">
+              min syllables
+            </label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="minSyllables" value="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="maxSyllables" class="control-label col-sm-2 col-sm-offset-3">
+              max syllables
+            </label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="maxSyllables" value="4">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="scheme" class="control-label col-sm-2 col-sm-offset-3">
+              rhyming scheme
+            </label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="scheme">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-7">
+              <button class="btn btn-primary" type="submit" onclick="getSong()">
+                get my song
+              </button>
+            </div>
+          </div>
         </form>
-        <br />
+      </div>
+
+
         <br />
         <br />
         <div id="songDiv" />
