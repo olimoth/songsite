@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html language="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+      var scheme = '';    
+
+      function addSyllable(num) {
+        console.log('adding num: ' + num);
+        scheme += num;
+        $(".rhyme").attr("disabled", false);
+        $(".syllable").attr("disabled", true);
+      }
+      
+      function addRhyme(rhyme) {
+        console.log('adding rhyme: ' + rhyme);
+        scheme += rhyme;
+        updateSchemeText();
+        $(".syllable").attr("disabled", false);
+        $(".rhyme").attr("disabled", true);
+      }
+
+      function updateSchemeText() {
+        scheme += ',';
+        $("#schemetext").val(scheme);
+      }
+    </script>
+  <head>
+  <body>
+    <br />
+    <br />
+    <br />
+    <div id="schemediv" class="col-sm-offset-4">
+      <button class="syllable btn btn-default" onclick="addSyllable('2')">2</button>
+      <button class="syllable btn btn-default" onclick="addSyllable('3')">3</button>
+      <button class="syllable btn btn-default" onclick="addSyllable('4')">4</button>
+      <button class="syllable btn btn-default" onclick="addSyllable('5')">5</button>
+      <br />
+      <button disabled class="rhyme btn btn-default" onclick="addRhyme('a')">a</button>
+      <button disabled class="rhyme btn btn-default" onclick="addRhyme('b')">b</button>
+      <button disabled class="rhyme btn btn-default" onclick="addRhyme('c')">c</button>
+      <button disabled class="rhyme btn btn-default" onclick="addRhyme('d')">d</button>
+    </div>
+    <br />
+    <br />
+    <input id="schemetext" type="text" class="col-sm-offset-4">
+  </body>
+</html>
