@@ -4,18 +4,36 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 console.log("document ready");
-                $.get(
-                    "http://localhost:5000/song", 
-                    {"scheme": "8a,8a,5b,5b,8a"},
-                    function(result) { 
-                        firstLine = result["songlines"][0];
-                        $("#songDiv").text(firstLine);
-                    }
-                );
             });
+
+            function showSong(song) {
+                $("#songDiv").text("");
+                $.each(song["songlines"], function(i, line) {
+                  $("#songDiv").append(line);
+                  $("#songDiv").append("<br />");
+                });
+            };
+
+            function getSong() {
+                scheme = $("#scheme").val();
+                $.get(
+                    "http://garywalkerphoto.com:5000/song", 
+                    {"scheme": scheme},
+                    showSong
+                );
+            };
         </script>
     </head>
     <body> 
+        <form>
+            max syllables  : <input type="text" id="maxSyllables"><br />
+            min syllables  : <input type="text" id="minSyllables"><br />
+            rhyming scheme : <input type="text" id="scheme"><br />
+            <input type="button" value="get my song" onclick="getSong()">
+        </form>
+        <br />
+        <br />
+        <br />
         <div id="songDiv" />
     </body>
 </html>
