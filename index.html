@@ -1,63 +1,32 @@
 <!DOCTYPE html>
 <html language="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <title>Nonsense Song Generator</title>
-
-        <style type="text/css">
-          #songContainer {
-            //background-color: #dddddd;
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #songDiv {
-            font-size: 1.5em;
-          }
-        </style>
-
-        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                console.log("document ready");
-                $("#songForm").submit(function(e){ return false; });
-                $("#schemeHelp").popover({
-                  placement: "auto left",
-                  html: true,
-                  trigger: "focus",
-                });
-            });
-
-            function showSong(song) {
-                $("#songDiv").text("");
-                $.each(song["songlines"], function(i, line) {
-                  $("#songDiv").append(line);
-                  $("#songDiv").append("<br />");
-                });
-            };
-
-            function getSong() {
-                maxSyllables = $("#maxSyllables").val();
-                minSyllables = $("#minSyllables").val();
-                scheme = $("#scheme").val();
-                $.ajax({
-                    type: "GET",
-                    url: "http://garywalkerphoto.com:5000/song", 
-                    data: {
-                      "minSyllables": minSyllables,
-                      "maxSyllables": maxSyllables,
-                      "scheme": scheme,
-                    },
-                    success: showSong
-                });
-            };
-        </script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <title>Nonsense Song Generator</title>
+      <style type="text/css">
+        body {
+          background-color: #bbbbbb;
+        }
+        #songContainer {
+          //background-color: #dddddd;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+        #songDiv {
+          font-size: 1.5em;
+        }
+        .syllable, .rhyme {
+          margin-bottom: 5px;
+          margin-top: 5px;
+        }
+      </style>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+      <script src="songmaker.js"></script>
     </head>
+
     <body> 
       <h1 class="col-sm-offset-2">Nonsense Song Generator</h1>
       <br />
@@ -83,18 +52,40 @@
             </div>
           </div>
 
+
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button class="syllable btn" onclick="addSyllable('3')">3</button>
+              <button class="syllable btn" onclick="addSyllable('4')">4</button>
+              <button class="syllable btn" onclick="addSyllable('5')">5</button>
+              <button class="syllable btn" onclick="addSyllable('6')">6</button>
+              <button class="syllable btn" onclick="addSyllable('7')">7</button>
+              <button class="syllable btn" onclick="addSyllable('8')">8</button>
+              <button class="syllable btn" onclick="addSyllable('9')">9</button>
+              <br />
+              <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('c')">c</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('d')">d</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('e')">e</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('f')">f</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('g')">g</button>
+            </div>
+          </div>
+
           <div class="form-group">
             <label for="scheme" class="control-label col-sm-3 col-xs-3">
               rhyming scheme
             </label>
             <div class="col-sm-8 col-xs-8">
-               <input class="form-control" type="text" id="scheme">
+               <input class="form-control" type="text" id="schemeText">
             </div>
             <button id="schemeHelp" type="button" data-toggle="popover" 
               class="btn btn-sm btn-info col-sm-1 col-xs-1" 
               title="Rhyme Scheme Syntax" 
-              data-content="A rhyming scheme is composed of a number of syllables and a letter for matching rhymes
-              separated by commas. <br /><br /> 
+              data-content="Each line is defined by a number and letter. The number is how many syllables
+              in the line, the letter is which lines it should rhyme with. Each line is separated by a comma.
+              <br /><br /> 
               For example, the scheme for a limerick is: <br /><br /> 8a,8a,5b,5b,8a">
               ?
             </button>
@@ -102,15 +93,17 @@
 
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-              <button class="btn btn-primary" type="submit" onclick="getSong()">
+              <button class="btn btn-primary" onclick="getSong()">
                 get my song
+              </button>
+              <button class="btn btn-danger" onclick="clearScheme()">
+                clear scheme 
               </button>
             </div>
           </div>
 
         </form>
-
-      </div>
+      </div> <!--songFormContainer-->
       <br />
       <br />
       <div id="songContainer" class="col-sm-offset-2 col-sm-6"><!-- style="border: 2px solid;">-->
