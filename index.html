@@ -12,6 +12,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 console.log("document ready");
+                $("#songForm").submit(function(e){ return false; });
             });
 
             function showSong(song) {
@@ -26,26 +27,26 @@
                 maxSyllables = $("#maxSyllables").val();
                 minSyllables = $("#minSyllables").val();
                 scheme = $("#scheme").val();
-                $.get(
-                    "http://garywalkerphoto.com:5000/song", 
-                    {
+                $.ajax({
+                    type: "GET",
+                    url: "http://garywalkerphoto.com:5000/song", 
+                    data: {
                       "minSyllables": minSyllables,
                       "maxSyllables": maxSyllables,
                       "scheme": scheme,
                     },
-                    showSong
-                );
+                    success: showSong
+                });
             };
         </script>
     </head>
     <body> 
       <script src="bootstrap/js/bootstrap.min.js"></script>
-
       <br />
       <br />
       <br />
-      <div class="my-magic-song-form">
-        <form class="form-horizontal">
+      <div id="songFormContainer">
+        <form id="songForm" class="form-horizontal">
           <div class="form-group">
             <label for="minSyllables" class="control-label col-sm-2 col-sm-offset-3">
               min syllables
@@ -79,10 +80,8 @@
           </div>
         </form>
       </div>
-
-
-        <br />
-        <br />
-        <div id="songDiv" />
+      <br />
+      <br />
+      <div id="songDiv" />
     </body>
 </html>
