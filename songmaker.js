@@ -2,9 +2,12 @@ $(document).ready(function() {
     console.log("document ready");
     $("#songForm").submit(function(e){ return false; });
     $("#schemeHelp").popover({
-        placement: "auto left",
+        placement: "right",
         html: true,
         trigger: "focus",
+    });
+    $("#schemeText").tooltip({
+        html: true,
     });
     $(".syllable").addClass("btn-primary");
     $(".rhyme").addClass("btn-info");
@@ -32,6 +35,14 @@ function getSong() {
         },
         success: showSong
   });
+}
+
+function createLimerick() {
+    $("#schemeText").val("8a,8a,5b,5b,8a");
+}
+
+function createSonnet() {
+    $("#schemeText").val("10a,10b,10b,10a,10a,10b,10b,10a,10c,10d,10e,10c,10d,10e");
 }
 
 var scheme = '';    

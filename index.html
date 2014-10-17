@@ -69,6 +69,19 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="predefined" class="control-label col-sm-3">
+              pre-defined schemes
+            </label>
+            <div id="predefined" class="col-sm-9">
+              <button class="btn btn-info" onclick="createLimerick()">
+                limerick
+              </button>
+              <button class="btn btn-info" onclick="createSonnet()">
+                sonnet
+              </button>
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
@@ -97,17 +110,15 @@
               rhyming scheme
             </label>
             <div class="col-sm-8 col-xs-8">
-               <input class="form-control" type="text" id="schemeText">
+              <!--<input class="form-control" type="text" id="schemeText">-->
+              <textarea id="schemeText" class="form-control" rows="2"
+                data-toggle="tooltip" data-placement="top" 
+                title="The rhyming scheme is as follows: a number specifying number of syllables, and a
+                letter specifying which other lines the last syllable should rhyme with,
+                separated by commas.<br /><br />
+                For example, the scheme for a limerick is: <br /><br /> 8a,8a,5b,5b,8a">
+              </textarea>
             </div>
-            <button id="schemeHelp" type="button" data-toggle="popover" 
-              class="btn btn-sm btn-info col-sm-1 col-xs-1" 
-              title="Rhyme Scheme Syntax" 
-              data-content="Each line is defined by a number and letter. The number is how many syllables
-              in the line, the letter is which lines it should rhyme with. Each line is separated by a comma.
-              <br /><br /> 
-              For example, the scheme for a limerick is: <br /><br /> 8a,8a,5b,5b,8a">
-              ?
-            </button>
           </div>
 
           <div class="form-group">
@@ -125,8 +136,9 @@
       </div> <!--songFormContainer-->
       <br />
       <br />
-      <div id="songContainer" class="col-sm-offset-2 col-sm-6"><!-- style="border: 2px solid;">-->
-        <div id="songDiv" class="col-sm-offset-3 col-sm-9" />
+      <div id="songContainer" class="col-sm-offset-3 col-sm-9"><!-- style="border: 2px solid;">-->
+        <!--div id="songDiv" class="col-sm-offset-1 col-sm-9" /-->
+        <div id="songDiv" class="col-sm-12 col-xs-12" />
       </div>
     </body>
 </html>
