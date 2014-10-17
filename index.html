@@ -4,18 +4,38 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-      <title>Nonsense Song Generator</title>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' 
+        rel='stylesheet' type='text/css'>
+      <title>nonsense song generator</title>
       <style type="text/css">
+        * {
+          font-family: "Open Sans", sans-serif;
+        }
         body {
-          background-color: #bbbbbb;
+          //background-color: #DAD000;
+        }
+        h1 {
+        }
+        div {
+          //border: 1px solid;
+          //border-radius: 10px;
+        }
+        #titleDiv {
+          //background-color: #FF00B9;
+        }
+        #songFormContainer {
+          //background-color: #BEFF00;
+          padding-top: 25px;
+          padding-right: 25px;
         }
         #songContainer {
-          //background-color: #dddddd;
+          //background-color: #FF00B9;
           padding-top: 10px;
           padding-bottom: 10px;
         }
         #songDiv {
           font-size: 1.5em;
+          font-family: "Open Sans", sans-serif;
         }
         .syllable, .rhyme {
           margin-bottom: 5px;
@@ -28,9 +48,9 @@
     </head>
 
     <body> 
-      <h1 class="col-sm-offset-2">Nonsense Song Generator</h1>
-      <br />
-      <br />
+      <div class="col-sm-offset-2 col-sm-6" id="titleDiv">
+        <h1>create your song</h1>
+      </div>
       <div id="songFormContainer" class="col-sm-offset-2 col-sm-6">
         <form id="songForm" class="form-horizontal">
 
