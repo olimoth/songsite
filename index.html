@@ -28,7 +28,7 @@
           padding-bottom: 10px;
         }
         #songDiv {
-          font-size: 1.5em;
+          font-size: 1.3em;
         }
         .syllable, .rhyme {
           margin-bottom: 5px;
@@ -45,7 +45,7 @@
 
     <body> 
       <div id="titleDiv">
-        <h1 style="margin-left:20px">create your song</h1>
+        <h1 style="margin-left:20px">create a song</h1>
       </div>
 
       <div id="songFormContainer" class="col-sm-6">
@@ -56,8 +56,9 @@
             <label for="minSyllables" class="control-label col-sm-3 col-xs-3">
               min syllables
             </label>
-            <div class="col-sm-2 col-xs-4">
-              <input class="form-control" type="text" id="minSyllables" value="1">
+            <div class="col-sm-7 col-xs-7">
+              <input id="minSyllableSlider" type="range" min="1" max="8" value="1"/>
+              <p id="minSyllableCounter" style="text-align:center">1</p>
             </div>
           </div>
 
@@ -65,8 +66,9 @@
             <label for="maxSyllables" class="control-label col-sm-3 col-xs-3">
               max syllables
             </label>
-            <div class="col-sm-2 col-xs-4">
-              <input class="form-control" type="text" id="maxSyllables" value="4">
+            <div class="col-sm-7 col-xs-7">
+              <input id="maxSyllableSlider" type="range" min="1" max="8" value="4"/>
+              <p id="maxSyllableCounter" style="text-align:center">4</p>
             </div>
           </div>
 

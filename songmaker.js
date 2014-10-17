@@ -11,6 +11,12 @@ $(document).ready(function() {
     });
     $(".syllable").addClass("btn-primary");
     $(".rhyme").addClass("btn-info");
+    $("#minSyllableSlider").change(function() {
+        $("#minSyllableCounter").text($(this).val());
+    });
+    $("#maxSyllableSlider").change(function() {
+        $("#maxSyllableCounter").text($(this).val());
+    });
 });
 
 function showSong(song) {
@@ -22,8 +28,8 @@ function showSong(song) {
 }
 
 function getSong() {
-    maxSyllables = $("#maxSyllables").val();
-    minSyllables = $("#minSyllables").val();
+    maxSyllables = $("#maxSyllableSlider").val();
+    minSyllables = $("#minSyllableSlider").val();
     scheme = $("#schemeText").val();
     $.ajax({
         type: "GET",
