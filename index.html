@@ -34,6 +34,9 @@
           margin-bottom: 5px;
           margin-top: 5px;
         }
+        .control-label {
+          font-weight: 400;
+        }
       </style>
       <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -41,12 +44,13 @@
     </head>
 
     <body> 
-      <div class="col-sm-offset-2 col-sm-6" id="titleDiv">
+      <div class="col-sm-offset-3 col-sm-4" id="titleDiv">
         <h1>create your song</h1>
       </div>
       <div id="songFormContainer" class="col-sm-offset-2 col-sm-6">
         <form id="songForm" class="form-horizontal">
 
+          <p>per-word settings </p>
           <div class="form-group">
             <label for="minSyllables" class="control-label col-sm-3 col-xs-3">
               min syllables
@@ -75,6 +79,7 @@
               <button class="syllable btn" onclick="addSyllable('7')">7</button>
               <button class="syllable btn" onclick="addSyllable('8')">8</button>
               <button class="syllable btn" onclick="addSyllable('9')">9</button>
+              <button class="syllable btn" onclick="addSyllable('10')">10</button>
               <br />
               <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
               <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
@@ -83,6 +88,7 @@
               <button disabled class="rhyme btn" onclick="addRhyme('e')">e</button>
               <button disabled class="rhyme btn" onclick="addRhyme('f')">f</button>
               <button disabled class="rhyme btn" onclick="addRhyme('g')">g</button>
+              <button disabled class="rhyme btn" onclick="addRhyme('h')">h</button>
             </div>
           </div>
 
