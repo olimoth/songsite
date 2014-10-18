@@ -9,6 +9,8 @@ $(document).ready(function() {
     $("#schemeText").tooltip({
         html: true,
     });
+    $(".min").addClass("btn-info");
+    $(".max").addClass("btn-warning");
     $(".syllable").addClass("btn-primary");
     $(".rhyme").addClass("btn-info");
     $("#minSyllableSlider").change(function() {
@@ -19,6 +21,7 @@ $(document).ready(function() {
     });
 });
 
+
 function showSong(song) {
     $("#songDiv").text("");
     $.each(song.songlines, function(i, line) {
@@ -27,9 +30,17 @@ function showSong(song) {
     });
 }
 
+function getMinSyllables() {
+    return String.trim($("#minSyllableButtonGroup > .btn.active").text());
+}
+
+function getMaxSyllables() {
+    return String.trim($("#maxSyllableButtonGroup > .btn.active").text());
+}
+
 function getSong() {
-    maxSyllables = $("#maxSyllableSlider").val();
-    minSyllables = $("#minSyllableSlider").val();
+    minSyllables = getMinSyllables(); 
+    maxSyllables = getMaxSyllables();
     scheme = $("#schemeText").val();
     $.ajax({
         type: "GET",

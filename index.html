@@ -56,9 +56,25 @@
             <label for="minSyllables" class="control-label col-sm-3 col-xs-3">
               min syllables
             </label>
-            <div class="col-sm-7 col-xs-7">
-              <input id="minSyllableSlider" type="range" min="1" max="8" value="1"/>
-              <p id="minSyllableCounter" style="text-align:center">1</p>
+            <div id="minSyllableButtonGroup" class="btn-group col-sm-7 col-xs-7" data-toggle="buttons">
+              <label class="min btn active">
+                <input type="radio" name="minSyllableRadio" id="min1">1
+              </label>
+              <label class="min btn">
+                <input type="radio" name="minSyllableRadio" id="min2">2
+              </label>
+              <label class="min btn">
+                <input type="radio" name="minSyllableRadio" id="min3">3
+              </label>
+              <label class="min btn">
+                <input type="radio" name="minSyllableRadio" id="min4">4
+              </label>
+              <label class="min btn">
+                <input type="radio" name="minSyllableRadio" id="min5">5
+              </label>
+              <label class="min btn">
+                <input type="radio" name="minSyllableRadio" id="min6">6
+              </label>
             </div>
           </div>
 
@@ -66,9 +82,25 @@
             <label for="maxSyllables" class="control-label col-sm-3 col-xs-3">
               max syllables
             </label>
-            <div class="col-sm-7 col-xs-7">
-              <input id="maxSyllableSlider" type="range" min="1" max="8" value="4"/>
-              <p id="maxSyllableCounter" style="text-align:center">4</p>
+            <div id="maxSyllableButtonGroup" class="btn-group col-sm-7 col-xs-7" data-toggle="buttons">
+              <label class="max btn">
+                <input type="radio" name="maxSyllableRadio" id="max1">1
+              </label>
+              <label class="max btn">
+                <input type="radio" name="maxSyllableRadio" id="max2">2
+              </label>
+              <label class="max btn">
+                <input type="radio" name="maxSyllableRadio" id="max3">3
+              </label>
+              <label class="max btn active">
+                <input type="radio" name="maxSyllableRadio" id="max4">4
+              </label>
+              <label class="max btn">
+                <input type="radio" name="maxSyllableRadio" id="max5">5
+              </label>
+              <label class="max btn">
+                <input type="radio" name="maxSyllableRadio" id="max6">6
+              </label>
             </div>
           </div>
 
@@ -87,7 +119,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="btn-group col-sm-offset-3 col-sm-9">
               <button class="syllable btn" onclick="addSyllable('3')">3</button>
               <button class="syllable btn" onclick="addSyllable('4')">4</button>
               <button class="syllable btn" onclick="addSyllable('5')">5</button>
@@ -96,7 +128,10 @@
               <button class="syllable btn" onclick="addSyllable('8')">8</button>
               <button class="syllable btn" onclick="addSyllable('9')">9</button>
               <button class="syllable btn" onclick="addSyllable('10')">10</button>
-              <br />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="btn-group col-sm-offset-3 col-sm-9">
               <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
               <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
               <button disabled class="rhyme btn" onclick="addRhyme('c')">c</button>
