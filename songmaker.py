@@ -200,7 +200,7 @@ class WordGenerator(object):
         invalid_start_regexes = [r'\b'+p+'+' for p in invalid_start_patterns]
         invalid_mid_patterns = ['br{c}', 'gn{c}', '{c}dl', '{c}lt', '{c}sl']
         invalid_mid_regexes = [p.format(c=consonant_class) for p in invalid_mid_patterns]
-        invalid_end_patterns = ['tl', 'sl', 'dr', 'dl'] 
+        invalid_end_patterns = ['tl', 'sl', 'dr', 'dl', 'dg', 'dn'] 
         invalid_end_regexes = [p+r'\b' for p in invalid_end_patterns]
         concatenated_reject_patterns = '|'.join((
             [large_consonant_group_pattern] +
@@ -237,6 +237,8 @@ class WordGenerator(object):
                 word += next_letter 
         return word
 
+
+class NoValidRhymeGroupsFound(Exception): pass
 
 class SongWriter(object):
     ''' 
@@ -284,10 +286,27 @@ class SongWriter(object):
         rhyme_groups = self.get_rhyme_groups()
         self.rhyme_groups = [self.get_words_by_syllable(g) for g in rhyme_groups]
 
+    def get_syllable_frequency(self):
+        frequencies = collections.defaultdict(int)
+        for group in self.rhyme_groups:
+            for key in group.keys():
+                frequencies[key] += 1
+        return frequencies
+
+    def get_valid_rhyme_group(self, rhyme_group, min_syllables, max_syllables):
+        attempts_left = 100
+        while attempts_left > 0:
+            chosen_group = random.choice(rhyme_group)
+            if (chosen_group.has_key(min_syllables) and
+                chosen_group.has_key(max_syllables)):
+                return chosen_group
+            attempts_left -= 1
+        raise NoValidRhymeGroupsFound()
+
     def get_song(self, rhyming_scheme, min_syllables=1, max_syllables=4):
         ''' Get a random song based on the words contained in self.trie '''
-        # check if min < 0 or max > [word group with highest number of syllables]
-        # and return error (throw exception?)
+        if min_syllables > max_syllables:
+            min_syllables = max_syllables
         self.construct_maps()
         scheme = self.get_parsed_rhyming_scheme(rhyming_scheme)
         distinct_schemes = set([line[1] for line in scheme])
@@ -297,7 +316,8 @@ class SongWriter(object):
         rhyme_group_copy = list(self.rhyme_groups)
         for distinct_scheme in distinct_schemes:
             assert(len(self.rhyme_groups) > 1)
-            rhyme_group = random.choice(rhyme_group_copy)
+            rhyme_group = self.get_valid_rhyme_group(
+                rhyme_group_copy, min_syllables, max_syllables)
             scheme_to_words[distinct_scheme] = rhyme_group
             rhyme_group_copy.remove(rhyme_group)
         song = []

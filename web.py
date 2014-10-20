@@ -22,6 +22,11 @@ def get_song():
             return resp
         except IndexError:
             continue
+        except songmaker.NoValidRhymeGroupsFound:
+            resp = flask.make_response(flask.jsonify(
+                {'songlines': ['could not create a song with those parameters']}))
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
 
 
 if __name__ == "__main__":
