@@ -28,6 +28,7 @@ function showSong(song) {
         $("#songDiv").append(line);
         $("#songDiv").append("<br />");
     });
+    window.scrollTo(0, $("#songDiv").offset().top);
 }
 
 function getMinSyllables() {

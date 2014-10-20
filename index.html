@@ -45,7 +45,7 @@
 
     <body> 
       <div id="titleDiv">
-        <h1 style="margin-left:20px">create a song</h1>
+        <h1 style="margin-left:20px">create a nonsense song</h1>
       </div>
 
       <div id="songFormContainer" class="col-sm-6">
@@ -69,12 +69,6 @@
               <label class="min btn">
                 <input type="radio" name="minSyllableRadio" id="min4">4
               </label>
-              <label class="min btn">
-                <input type="radio" name="minSyllableRadio" id="min5">5
-              </label>
-              <label class="min btn">
-                <input type="radio" name="minSyllableRadio" id="min6">6
-              </label>
             </div>
           </div>
 
@@ -95,12 +89,6 @@
               <label class="max btn active">
                 <input type="radio" name="maxSyllableRadio" id="max4">4
               </label>
-              <label class="max btn">
-                <input type="radio" name="maxSyllableRadio" id="max5">5
-              </label>
-              <label class="max btn">
-                <input type="radio" name="maxSyllableRadio" id="max6">6
-              </label>
             </div>
           </div>
 
@@ -119,27 +107,31 @@
           </div>
 
           <div class="form-group">
-            <div class="btn-group col-sm-offset-3 col-sm-9">
-              <button class="syllable btn" onclick="addSyllable('3')">3</button>
-              <button class="syllable btn" onclick="addSyllable('4')">4</button>
-              <button class="syllable btn" onclick="addSyllable('5')">5</button>
-              <button class="syllable btn" onclick="addSyllable('6')">6</button>
-              <button class="syllable btn" onclick="addSyllable('7')">7</button>
-              <button class="syllable btn" onclick="addSyllable('8')">8</button>
-              <button class="syllable btn" onclick="addSyllable('9')">9</button>
-              <button class="syllable btn" onclick="addSyllable('10')">10</button>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="btn-group col-sm-offset-3 col-sm-9">
-              <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('c')">c</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('d')">d</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('e')">e</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('f')">f</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('g')">g</button>
-              <button disabled class="rhyme btn" onclick="addRhyme('h')">h</button>
+            <label for="buildSyllable" class="control-label col-sm-3">
+              click number then letter to build a rhyming scheme
+            </label>
+            <div id="buildButtons" class="col-sm-9">
+              <div id="buildSyllable" class="btn-group col-sm-9">
+                <button class="syllable btn" onclick="addSyllable('3')">3</button>
+                <button class="syllable btn" onclick="addSyllable('4')">4</button>
+                <button class="syllable btn" onclick="addSyllable('5')">5</button>
+                <button class="syllable btn" onclick="addSyllable('6')">6</button>
+                <button class="syllable btn" onclick="addSyllable('7')">7</button>
+                <button class="syllable btn" onclick="addSyllable('8')">8</button>
+                <button class="syllable btn" onclick="addSyllable('9')">9</button>
+                <button class="syllable btn" onclick="addSyllable('10')">10</button>
+              </div>
+
+              <div id="buildRhyme" class="btn-group col-sm-12">
+                <button disabled class="rhyme btn" onclick="addRhyme('a')">a</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('b')">b</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('c')">c</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('d')">d</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('e')">e</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('f')">f</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('g')">g</button>
+                <button disabled class="rhyme btn" onclick="addRhyme('h')">h</button>
+              </div>
             </div>
           </div>
 
@@ -148,7 +140,6 @@
               rhyming scheme
             </label>
             <div class="col-sm-8 col-xs-8">
-              <!--<input class="form-control" type="text" id="schemeText">-->
               <textarea id="schemeText" class="form-control" rows="2"
                 data-toggle="tooltip" data-placement="top" 
                 title="The rhyming scheme is as follows: a number specifying number of syllables, and a
