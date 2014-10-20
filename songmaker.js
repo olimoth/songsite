@@ -12,7 +12,7 @@ $(document).ready(function() {
     $(".min").addClass("btn-info");
     $(".max").addClass("btn-warning");
     $(".syllable").addClass("btn-primary");
-    $(".rhyme").addClass("btn-info");
+    $(".rhyme").addClass("btn-primary");
     $("#minSyllableSlider").change(function() {
         $("#minSyllableCounter").text($(this).val());
     });
