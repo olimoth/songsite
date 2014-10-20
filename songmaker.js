@@ -63,6 +63,10 @@ function createSonnet() {
     $("#schemeText").val("10a,10b,10b,10a,10a,10b,10b,10a,10c,10d,10e,10c,10d,10e");
 }
 
+function createBurns() {
+    $("#schemeText").val("9a,9a,9a,5b,9a,5b");
+}
+
 var scheme = '';    
 
 function addSyllable(num) {
