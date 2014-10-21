@@ -32,11 +32,11 @@ function showSong(song) {
 }
 
 function getMinSyllables() {
-    return String.trim($("#minSyllableButtonGroup > .btn.active").text());
+    return $("#minSyllableButtonGroup > .btn.active").text().trim();
 }
 
 function getMaxSyllables() {
-    return String.trim($("#maxSyllableButtonGroup > .btn.active").text());
+    return $("#maxSyllableButtonGroup > .btn.active").text().trim();
 }
 
 function getSong() {
@@ -45,7 +45,7 @@ function getSong() {
     scheme = $("#schemeText").val();
     $.ajax({
         type: "GET",
-        url: "http://176.227.202.176:5000/song", 
+        url: "http://songservice.linderyap.com", 
         data: {
             "minSyllables": minSyllables,
             "maxSyllables": maxSyllables,
