@@ -30,8 +30,6 @@ def get_song():
     scheme = flask.request.args.get('scheme')
     min_syllables = int(flask.request.args.get('minSyllables', 1))
     max_syllables = int(flask.request.args.get('maxSyllables', 4))
-    print '{} | min: {}, max: {}, scheme: {}'.format(
-        datetime.datetime.now(), min_syllables, max_syllables, scheme)
     while True:
         try:
             song = song_writer.get_song(scheme, min_syllables, max_syllables)
