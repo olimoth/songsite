@@ -32,11 +32,11 @@ function showSong(song) {
 }
 
 function getMinSyllables() {
-    return String.trim($("#minSyllableButtonGroup > .btn.active").text());
+    return $("#minSyllableButtonGroup > .btn.active").text().trim();
 }
 
 function getMaxSyllables() {
-    return String.trim($("#maxSyllableButtonGroup > .btn.active").text());
+    return $("#maxSyllableButtonGroup > .btn.active").text().trim();
 }
 
 function getSong() {
@@ -45,7 +45,7 @@ function getSong() {
     scheme = $("#schemeText").val();
     $.ajax({
         type: "GET",
-        url: "http://176.227.202.176:5000/song", 
+        url: "http://songservice.linderyap.com", 
         data: {
             "minSyllables": minSyllables,
             "maxSyllables": maxSyllables,
@@ -56,15 +56,15 @@ function getSong() {
 }
 
 function createLimerick() {
-    $("#schemeText").val("8a,8a,5b,5b,8a");
+    $("#schemeText").val("8a, 8a, 5b, 5b, 8a");
 }
 
 function createSonnet() {
-    $("#schemeText").val("10a,10b,10b,10a,10a,10b,10b,10a,10c,10d,10e,10c,10d,10e");
+    $("#schemeText").val("10a, 10b, 10b, 10a, 10a, 10b, 10b, 10a, 10c, 10d, 10e, 10c, 10d, 10e");
 }
 
 function createBurns() {
-    $("#schemeText").val("9a,9a,9a,5b,9a,5b");
+    $("#schemeText").val("9a, 9a, 9a, 5b, 9a, 5b");
 }
 
 var scheme = '';    
@@ -78,14 +78,14 @@ function addSyllable(num) {
 
 function addRhyme(rhyme) {
     console.log('adding rhyme: ' + rhyme);
-    scheme += rhyme;
+    scheme += rhyme + ', ';
     updateSchemeText();
     $(".syllable").attr("disabled", false);
     $(".rhyme").attr("disabled", true);
 }
 
 function updateSchemeText() {
-    scheme += ',';
+    //scheme += ',';
     $("#schemeText").val(scheme);
 }
 

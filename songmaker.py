@@ -196,11 +196,11 @@ class WordGenerator(object):
         self.position_limit = 6
         large_consonant_group_pattern = '[%s]{%s,}' % (CONSONANTS, 3)
         consonant_class = '[%s]+' % CONSONANTS
-        invalid_start_patterns = ['mr', 'gn', 'hn', 'hr', 'rn', 'mn', 'nt', 'lt', 'nl', 'wn']
+        invalid_start_patterns = ['mr', 'gn', 'hn', 'hr', 'rn', 'mn', 'nt', 'lt', 'rt', 'nl', 'wn']
         invalid_start_regexes = [r'\b'+p+'+' for p in invalid_start_patterns]
         invalid_mid_patterns = ['br{c}', 'gn{c}', '{c}dl', '{c}lt', '{c}sl']
         invalid_mid_regexes = [p.format(c=consonant_class) for p in invalid_mid_patterns]
-        invalid_end_patterns = ['tl', 'sl', 'dr', 'dl', 'dg', 'dn'] 
+        invalid_end_patterns = ['tl', 'tr', 'nl', 'sl', 'dr', 'dl', 'dg', 'dn'] 
         invalid_end_regexes = [p+r'\b' for p in invalid_end_patterns]
         concatenated_reject_patterns = '|'.join((
             [large_consonant_group_pattern] +
